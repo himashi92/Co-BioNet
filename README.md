@@ -35,13 +35,15 @@ pip install -r requirements.txt
 ### Typical Install Time 
 This depends on the internet connection speed. It would take around 15-30 minutes to create environment and install all the dependencies required.
 
-
 ## Dataset Preparation
 The experiments are conducted on two publicly available datasets,
 - National Institutes of Health (NIH) Panceas CT Dataset : https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT
 - 2018 Left Atrial Segmentation Challenge Dataset : http://atriaseg2018.cardiacatlas.org
 
 Pre-processed data can be found in folder data.
+
+## Trained Model Weights
+Download trained model weights from this shared drive [link](https://drive.google.com/drive/folders/1O8GmlquR2ZS6-PBTBp9d4GSWg06Z-uwa?usp=sharing), and put it under folder **code/model**
 
 ## Running Demo
 Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch models on 10% and 20% Labeled Pancreas CT and Left Atrial MRI data. You can run the given python notebook in the demo folder.
