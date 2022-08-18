@@ -40,7 +40,7 @@ The experiments are conducted on two publicly available datasets,
 - 2018 Left Atrial Segmentation Challenge Dataset : http://atriaseg2018.cardiacatlas.org
 
 ## Running Demo
-Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch model on 10% and 20% Labeled Pancreas CT data. You can run the given python notebook in the demo folder.
+Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch models on 10% and 20% Labeled Pancreas CT and Left Atrial MRI data. You can run the given python notebook in the demo folder.
 
 ## Train Model
 ### To train the model for Pancreas CT dataset on 10% Lableled data
@@ -55,13 +55,13 @@ cd code
 nohup python train_cobionet_PANCREAS.py --labelnum 12 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_20_perc.out &
 ```
 
-### To train the model for LA MRI dataset on 10% Lableled data
+### To train the model for Left Atrial MRI dataset on 10% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_LA.py --labelnum 8 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_10_perc.out &
 ```
 
-### To train the model for LA MRI dataset on 20% Lableled data
+### To train the model for Left Atrial MRI dataset on 20% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_LA.py --labelnum 16 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_20_perc.out &
