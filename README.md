@@ -1,6 +1,8 @@
 # Co-BioNet: Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric  Medical Image Segmentation
 This repo contains the supported pytorch code and configuration files to reproduce results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
 
+![Proposed Architecture](img/co_bionet_architecture.png?raw=true)
+
 ## System requirements
 Under this section, we provide details on environmental setup and dependencies required to train/test the Co-BioNet model.
 This software was originally designed and run on a system running Ubuntu (Compatible with Windows 11 as well).
