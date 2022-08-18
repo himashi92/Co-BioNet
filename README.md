@@ -14,7 +14,7 @@ To train Co-BioNet with the given settings, the system requires a GPU with at le
 <br>
 To test model's performance on unseen test data, the system requires a GPU with at least 4 GB.
 
-###Create a virtual environment
+### Create a virtual environment
 
 virtualenv -p /usr/bin/python3.8 venv
 source venv/bin/activate
