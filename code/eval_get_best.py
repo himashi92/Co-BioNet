@@ -8,7 +8,7 @@ from utils.test_patch_best import test_all_case
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset_name', type=str, default='LA', help='dataset_name')
 parser.add_argument('--root_path', type=str, default='./', help='Name of Experiment')
-parser.add_argument('--exp', type=str, default='Co_SegNet_lambda_0.9_con_1.0_tm_0.3', help='exp_name')
+parser.add_argument('--exp', type=str, default='Co_BioNet3', help='exp_name')
 parser.add_argument('--model', type=str, default='vnet', help='model_name')
 parser.add_argument('--gpu', type=str, default='0', help='GPU to use')
 parser.add_argument('--detail', type=int, default=1, help='print metrics for every samples?')
@@ -19,7 +19,7 @@ FLAGS = parser.parse_args()
 os.environ['CUDA_VISIBLE_DEVICES'] = FLAGS.gpu
 snapshot_path ="./model/{}_{}_{}_labeled/{}".format(FLAGS.dataset_name, FLAGS.exp, FLAGS.labelnum,
                                                                      FLAGS.model)
-test_save_path = "./model/{}_{}_{}_labeled/{}_predictions_best_AND/".format(FLAGS.dataset_name, FLAGS.exp,
+test_save_path = "./model/{}_{}_{}_labeled/{}_predictions_best_OR/".format(FLAGS.dataset_name, FLAGS.exp,
                                                                                    FLAGS.labelnum, FLAGS.model)
 
 num_classes = 2

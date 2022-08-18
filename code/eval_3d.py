@@ -8,19 +8,20 @@ from utils.test_patch import test_all_case
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset_name', type=str, default='Pancreas_CT', help='dataset_name')
 parser.add_argument('--root_path', type=str, default='./', help='Name of Experiment')
-parser.add_argument('--exp', type=str, default='Co_SegNet_adv_v2_lambda_1.0_con_1.0_tm_0.2', help='exp_name')
+parser.add_argument('--exp', type=str, default='Co_BioNet', help='exp_name')
 parser.add_argument('--model', type=str, default='vnet', help='model_name')
 parser.add_argument('--gpu', type=str, default='0', help='GPU to use')
 parser.add_argument('--detail', type=int, default=1, help='print metrics for every samples?')
 parser.add_argument('--labelnum', type=int, default=6, help='labeled data')
 parser.add_argument('--nms', type=int, default=0, help='apply NMS post-procssing?')
+parser.add_argument('--model_num', type=int, default=1, help='Model number ? 1 or 2')
 
 FLAGS = parser.parse_args()
 os.environ['CUDA_VISIBLE_DEVICES'] = FLAGS.gpu
 snapshot_path = FLAGS.root_path + "model/{}_{}_{}_labeled/{}".format(FLAGS.dataset_name, FLAGS.exp, FLAGS.labelnum,
                                                                      FLAGS.model)
-test_save_path = FLAGS.root_path + "model/{}_{}_{}_labeled/{}_predictions_1_v2/".format(FLAGS.dataset_name, FLAGS.exp,
-                                                                                     FLAGS.labelnum, FLAGS.model)
+test_save_path = FLAGS.root_path + "model/{}_{}_{}_labeled/{}_predictions_{}/".format(FLAGS.dataset_name, FLAGS.exp,
+                                                                                     FLAGS.labelnum, FLAGS.model, FLAGS.model_num)
 
 num_classes = 2
 if FLAGS.dataset_name == "LA":
@@ -45,7 +46,7 @@ print(test_save_path)
 
 def calculate_metric():
     net = net_factory(net_type='vnet', in_chns=1, class_num=num_classes - 1, mode="test")
-    save_mode_path = os.path.join(snapshot_path, 'best_model_1.pth'.format(FLAGS.model))
+    save_mode_path = os.path.join(snapshot_path, 'best_model_{}.pth'.format(FLAGS.model_num))
     net.load_state_dict(torch.load(save_mode_path), strict=False)
     print("init weight from {}".format(save_mode_path))
     net.eval()

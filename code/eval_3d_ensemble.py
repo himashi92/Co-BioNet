@@ -6,13 +6,13 @@ from networks.net_factory import net_factory
 from utils.test_patch_ensemble import test_all_case
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset_name', type=str, default='LA', help='dataset_name')
+parser.add_argument('--dataset_name', type=str, default='Pancreas_CT', help='dataset_name')
 parser.add_argument('--root_path', type=str, default='./', help='Name of Experiment')
 parser.add_argument('--exp', type=str, default='Co_BioNet', help='exp_name')
 parser.add_argument('--model', type=str, default='vnet', help='model_name')
 parser.add_argument('--gpu', type=str, default='0', help='GPU to use')
 parser.add_argument('--detail', type=int, default=1, help='print metrics for every samples?')
-parser.add_argument('--labelnum', type=int, default=8, help='labeled data')
+parser.add_argument('--labelnum', type=int, default=6, help='labeled data')
 parser.add_argument('--nms', type=int, default=0, help='apply NMS post-procssing?')
 
 FLAGS = parser.parse_args()
@@ -43,7 +43,7 @@ if not os.path.exists(test_save_path):
 print(test_save_path)
 
 
-def test_calculate_metric():
+def calculate_metric():
     net_1 = net_factory(net_type='vnet', in_chns=1, class_num=num_classes - 1, mode="test")
     save_mode_path_1 = os.path.join(snapshot_path, 'best_model_1.pth'.format(FLAGS.model))
     net_1.load_state_dict(torch.load(save_mode_path_1), strict=False)
@@ -71,5 +71,5 @@ def test_calculate_metric():
 
 
 if __name__ == '__main__':
-    metric = test_calculate_metric()
+    metric = calculate_metric()
     print(metric)
