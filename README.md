@@ -41,8 +41,10 @@ Demonstration is created on generating segmentation masks on a sample of unseen 
 
 ## Train Model
 ### To train the model for Pancreas CT dataset on 10% Lableled data
-- cd code
-- nohup python train_cobionet_PANCREAS.py --labelnum 6 &> pa_10_perc.out &
+```bash
+cd code
+nohup python train_cobionet_PANCREAS.py --labelnum 6 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_10_perc.out &
+```
 
 ### To train the model for Pancreas CT dataset on 20% Lableled data
 - cd code
