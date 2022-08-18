@@ -1,0 +1,2 @@
+- Download pancreas CT data [National Institutes of Health (NIH) Panceas CT Dataset](https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT). 
+- Pre-processing data like existing work [MC-Net](https://github.com/ycwu1997/MC-Net/)
