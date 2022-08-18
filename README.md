@@ -75,6 +75,23 @@ It would take around 4 hours to complete model training.
 
 ## Test Model
 
+### To test the model 1 for Pancreas CT dataset on 10% Lableled data
+```bash
+cd code
+python eval_3d.py --dataset_name Pancreas_CT --labelnum 6 --model_num 1
+```
+
+### To test the ensemble model for Pancreas CT dataset on 10% Lableled data
+```bash
+cd code
+python eval_3d_ensemble.py --dataset_name Pancreas_CT --labelnum 6
+```
+
+### To test and get best segmentation masks that are more closer to ground truth annotaions out of model 1, model 2 and the ensemble model for Pancreas CT dataset on 10% Lableled data
+```bash
+cd code
+python eval_get_best.py --dataset_name Pancreas_CT --labelnum 6
+```
 
 ## Acknowledgements
 
