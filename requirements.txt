@@ -14,4 +14,3 @@ matplotlib
 torchio
 medpy
 h5py
-celluloid
