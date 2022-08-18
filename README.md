@@ -1,8 +1,6 @@
 # Co-BioNet: Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric  Medical Image Segmentation
 This repo contains the supported pytorch code and configuration files to reproduce results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
 
-
-
 ## System requirements
 Under this section, we provide details on environmental setup and dependencies required to train/test the Co-BioNet model.
 This software was originally designed and run on a system running Ubuntu (Compatible with Windows 11 as well).
@@ -16,16 +14,21 @@ To test model's performance on unseen test data, the system requires a GPU with 
 
 ### Create a virtual environment
 
-- virtualenv -p /usr/bin/python3.8 venv
-- source venv/bin/activate
+```bash 
+virtualenv -p /usr/bin/python3.8 venv
+source venv/bin/activate
+```
 
 ### Installation guide 
 
 - Install torch : 
+```bash
 pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-
-- Install other dependencies : 
+```
+- Install other dependencies :
+```bash 
 pip install -r requirements.txt
+```
 
 ### Typical Install Time 
 This depends on the internet connection speed. It would take around 15-30 minutes to create environment and install all the dependencies required.
@@ -47,18 +50,23 @@ nohup python train_cobionet_PANCREAS.py --labelnum 6 --lamda 1.0 --consistency 1
 ```
 
 ### To train the model for Pancreas CT dataset on 20% Lableled data
-- cd code
-- nohup python train_cobionet_PANCREAS.py --labelnum 12 &> pa_20_perc.out &
+```bash
+cd code
+nohup python train_cobionet_PANCREAS.py --labelnum 12 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_20_perc.out &
+```
 
 ### To train the model for LA MRI dataset on 10% Lableled data
-- cd code
-- nohup python train_cobionet_LA.py --labelnum 8 &> la_10_perc.out &
+```bash
+cd code
+nohup python train_cobionet_LA.py --labelnum 8 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_10_perc.out &
+```
 
 ### To train the model for LA MRI dataset on 20% Lableled data
-- cd code
-- nohup python train_cobionet_LA.py --labelnum 16 &> la_20_perc.out &
+```bash
+cd code
+nohup python train_cobionet_LA.py --labelnum 16 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_20_perc.out &
+```
 
-<br>
 It would take around 4 hours to complete model training.
 
 ## Test Model
