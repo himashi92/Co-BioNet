@@ -99,8 +99,8 @@ def loss_diff2(u_prediction_1, u_prediction_2):
     return loss_diff_avg
 
 
-def loss_mask(u_prediction_1, u_prediction_2, critic_segs):
-    gen_mask = (critic_segs.squeeze(0) > 0.2).float()
+def loss_mask(u_prediction_1, u_prediction_2, critic_segs, T_m):
+    gen_mask = (critic_segs.squeeze(0) > T_m).float()
     loss_a = gen_mask * CE(u_prediction_1,
                                         Variable(u_prediction_2.float(), requires_grad=False))
 
@@ -118,10 +118,9 @@ def disc_loss(pred, target, target_zeroes, target_ones):
     return loss
 
 
-def gen_loss(pred, target, target_zeroes, target_ones):
-    real_loss1 = CE(target, target_ones.float())
-    fake_loss1 = CE(pred, target_zeroes.float())
+def gen_loss(pred, target_ones):
+    fake_loss1 = CE(pred, target_ones.float())
 
-    loss = (1/2) * (real_loss1 + fake_loss1)
+    loss = fake_loss1
 
     return loss
