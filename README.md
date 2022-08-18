@@ -73,7 +73,7 @@ cd code
 nohup python train_cobionet_LA.py --labelnum 16 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_20_perc.out &
 ```
 
-It would take around 4 hours to complete model training.
+It would take around 5 hours to complete model training.
 
 ## Test Model
 
