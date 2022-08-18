@@ -16,8 +16,8 @@ To test model's performance on unseen test data, the system requires a GPU with 
 
 ### Create a virtual environment
 
-virtualenv -p /usr/bin/python3.8 venv
-source venv/bin/activate
+- virtualenv -p /usr/bin/python3.8 venv
+- source venv/bin/activate
 
 ### Installation guide 
 
