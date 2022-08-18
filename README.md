@@ -49,25 +49,25 @@ Download trained model weights from this shared drive [link](https://drive.googl
 Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch models on 10% and 20% Labeled Pancreas CT and Left Atrial MRI data. You can run the given python notebook in the demo folder.
 
 ## Train Model
-### To train the model for Pancreas CT dataset on 10% Lableled data
+- To train the model for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_PANCREAS.py --labelnum 6 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_10_perc.out &
 ```
 
-### To train the model for Pancreas CT dataset on 20% Lableled data
+- To train the model for Pancreas CT dataset on 20% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_PANCREAS.py --labelnum 12 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_20_perc.out &
 ```
 
-### To train the model for Left Atrial MRI dataset on 10% Lableled data
+- To train the model for Left Atrial MRI dataset on 10% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_LA.py --labelnum 8 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_10_perc.out &
 ```
 
-### To train the model for Left Atrial MRI dataset on 20% Lableled data
+- To train the model for Left Atrial MRI dataset on 20% Lableled data
 ```bash
 cd code
 nohup python train_cobionet_LA.py --labelnum 16 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_20_perc.out &
@@ -77,19 +77,19 @@ It would take around 4 hours to complete model training.
 
 ## Test Model
 
-### To test the model 1 for Pancreas CT dataset on 10% Lableled data
+- To test the model 1 for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
 python eval_3d.py --dataset_name Pancreas_CT --labelnum 6 --model_num 1
 ```
 
-### To test the ensemble model for Pancreas CT dataset on 10% Lableled data
+- To test the ensemble model for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
 python eval_3d_ensemble.py --dataset_name Pancreas_CT --labelnum 6
 ```
 
-### To test and get best segmentation masks that are more closer to ground truth annotations out of model 1, model 2 and the ensemble model for Pancreas CT dataset on 10% Lableled data
+- To test and get best segmentation masks that are more closer to ground truth annotations out of model 1, model 2 and the ensemble model for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
 python eval_get_best.py --dataset_name Pancreas_CT --labelnum 6
