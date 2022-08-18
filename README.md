@@ -39,6 +39,8 @@ The experiments are conducted on two publicly available datasets,
 - National Institutes of Health (NIH) Panceas CT Dataset : https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT
 - 2018 Left Atrial Segmentation Challenge Dataset : http://atriaseg2018.cardiacatlas.org
 
+Pre-processed data can be found in folder data.
+
 ## Running Demo
 Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch models on 10% and 20% Labeled Pancreas CT and Left Atrial MRI data. You can run the given python notebook in the demo folder.
 
