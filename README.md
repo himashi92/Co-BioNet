@@ -1,6 +1,13 @@
 # Co-BioNet: Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric  Medical Image Segmentation
 This repo contains the supported pytorch code and configuration files to reproduce results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
 
+## Abstract
+
+The tremendous progress in deep learning has resulted in accurate  models in the field of medical AI. However, these deep learning models usually require large amounts of annotated data for training, which is prone to human biases and quite often unavailable for dense prediction tasks such as image segmentation. Inspired by semi-supervised deep learning learning algorithms, which make use of both labeled  and  unlabeled data for training, we propose a  dual-view framework based upon adversarial learning for image segmentation. In doing so, we employ two critics to allow each view to learn from high-confidence predictions of the other view by determining the uncertainty of generated predictions using entropy calculation. Further, to jointly learn the dual views and their critics, we formulate the learning problem as a min-max problem. We analyze and contrast our proposed method against state-of-the-art baselines, both qualitatively and quantitatively, on the National Institutes of Health (NIH) pancreas CT dataset and the Left Atrial Segmentation Challenge (LA) MRI dataset and demonstrate that the proposed semi-supervised method substantially outperforms the competing baselines while achieving competitive performance compared to fully-supervised counterparts. We hypothesize that uncertainty guided co-training framework can make two competing neural networks that are more robust to data artefacts and has the ability to generate multiple plausible segmentation masks that can be helpful in semi automated segmentation process. 
+
+## Link to full paper:
+To be Added
+
 ![Proposed Architecture](img/co_bionet_architecture.png?raw=true)
 
 ## System requirements
