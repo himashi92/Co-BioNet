@@ -8,6 +8,7 @@ The tremendous progress in deep learning has resulted in accurate  models in the
 ## Link to full paper:
 To be Added
 
+## Proposed Architecture
 ![Proposed Architecture](img/co_bionet_architecture.png?raw=true)
 
 ## System requirements
