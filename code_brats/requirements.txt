@@ -1,0 +1,16 @@
+tensorboardx
+pyyaml
+yacs
+einops
+SimpleITK
+monai
+mmcv
+timm
+pandas
+numpy
+scikit-image
+sklearn
+matplotlib
+torchio
+medpy
+h5py
