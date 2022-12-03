@@ -44,7 +44,7 @@ def var_all_case(model, num_classes, patch_size=(112, 112, 80), stride_xy=18, st
     return avg_dice
 
 
-def var_all_case_cosegnet(model, num_classes, patch_size=(112, 112, 80), stride_xy=18, stride_z=4, dataset_name="LA"):
+def var_all_case_cobionet(model1, model2, num_classes, patch_size=(112, 112, 80), stride_xy=18, stride_z=4, dataset_name="LA"):
     if dataset_name == "LA":
         with open('../data/LA/test.list', 'r') as f:
             image_list = f.readlines()
@@ -60,8 +60,17 @@ def var_all_case_cosegnet(model, num_classes, patch_size=(112, 112, 80), stride_
         h5f = h5py.File(image_path, 'r')
         image = h5f['image'][:]
         label = h5f['label'][:]
-        prediction, score_map = test_single_case_first_output(model, image, stride_xy, stride_z, patch_size,
+        prediction_1, score_map_1 = test_single_case_first_output(model1, image, stride_xy, stride_z, patch_size,
                                                               num_classes=num_classes)
+        prediction_2, score_map_2 = test_single_case_first_output(model2, image, stride_xy, stride_z, patch_size,
+                                                                num_classes=num_classes)
+
+        # prediction_1 = getLargestCC(prediction_1)
+        # prediction_2 = getLargestCC(prediction_2)
+
+        prediction = np.logical_and(prediction_1, prediction_2)
+        #score_map = np.logical_and(score_map_1, score_map_2)
+
         if np.sum(prediction) == 0:
             dice = 0
         else:
@@ -89,10 +98,11 @@ def test_all_case(model_name, num_outputs, model_1, model_2, image_list, num_cla
         prediction_2, score_map_2 = test_single_case_first_output(model_2, image, stride_xy, stride_z, patch_size,
                                                                   num_classes=num_classes)
 
-        prediction_1 = getLargestCC(prediction_1)
-        prediction_2 = getLargestCC(prediction_2)
+        p = prediction_1 + prediction_2
+        pred = p / 2
+        prediction = (pred > 0.5).astype(np.int)
+        prediction = getLargestCC(prediction)
 
-        prediction = np.logical_and(prediction_1, prediction_2)
         score_map = np.logical_and(score_map_1, score_map_2)
 
         if np.sum(prediction) == 0:
@@ -189,7 +199,7 @@ def test_single_case_first_output(model, image, stride_xy, stride_z, patch_size,
                     = cnt[xs:xs + patch_size[0], ys:ys + patch_size[1], zs:zs + patch_size[2]] + 1
 
     score_map = score_map / np.expand_dims(cnt, axis=0)
-    label_map = (score_map[0] > 0.5).astype(np.int)
+    label_map = score_map[0] #(score_map[0] > 0.5).astype(np.int)
     if add_pad:
         label_map = label_map[wl_pad:wl_pad + w, hl_pad:hl_pad + h, dl_pad:dl_pad + d]
         score_map = score_map[:, wl_pad:wl_pad + w, hl_pad:hl_pad + h, dl_pad:dl_pad + d]
