@@ -108,6 +108,5 @@ If you find this repository useful, please consider giving us a star ⭐ and cit
 
 ```bash
       Peiris, Himashi (2023): Project Contributions. figshare. Journal contribution. https://doi.org/10.6084/m9.figshare.22140194.v5
-    }
 ```
 
