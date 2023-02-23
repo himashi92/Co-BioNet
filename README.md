@@ -88,7 +88,19 @@ cd code
 nohup python train_cobionet_semi.py --dataset_name LA --labelnum 16 --lamda 0.7 --consistency 1.0 --mu 0.01 --t_m 0.4 --max_iteration 15000 &> la_20_perc.out &
 ```
 
-It would take around 5 hours to complete model training. You can try out different hyper-parameter settings and further improve the accuracy.
+- To train the model for MSD BraTS MRI dataset on 10% Lableled data
+```bash
+cd code_msd_brats
+nohup python train_cobionet_semi.py --dataset_name MSD_BRATS --labelnum 39 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.25 --max_iteration 10000 &> msd_10_perc.out &
+```
+
+- To train the model for MSD BraTS MRI dataset on 20% Lableled data
+```bash
+cd code_msd_brats
+nohup python train_cobionet_semi.py --dataset_name MSD_BRATS --labelnum 77 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.25 --max_iteration 10000 &> msd_20_perc.out &
+```
+
+It would take around 5 hours to complete model training for Pancreas and Left Atrium datasets. For MSD BraTS dataset, it will take around 12 hours to complete training. You can try out different hyper-parameter settings and further improve the accuracy.
 
 ## Hyperparameter Setting
 
