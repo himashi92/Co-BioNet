@@ -1,13 +1,15 @@
-import torch
-import numpy as np
-from torch.utils.data import Dataset
-import h5py
 import itertools
-from scipy import ndimage
 import random
-from torch.utils.data.sampler import Sampler
+
+import h5py
+import numpy as np
+import torch
+from scipy import ndimage
+from scipy.ndimage import zoom
 from skimage import transform as sk_trans
-from scipy.ndimage import rotate, zoom
+from torch.utils.data import Dataset
+from torch.utils.data.sampler import Sampler
+
 
 class BaseDataSets(Dataset):
     def __init__(self, base_dir=None, split='train', num=None, transform=None):
@@ -44,6 +46,7 @@ class BaseDataSets(Dataset):
             sample = self.transform(sample)
         sample["idx"] = idx
         return sample
+
 
 def random_rot_flip(image, label):
     k = np.random.randint(0, 4)
@@ -86,22 +89,23 @@ class RandomGenerator(object):
 
 class LAHeart(Dataset):
     """ LA Dataset """
+
     def __init__(self, base_dir=None, split='train', num=None, transform=None):
         self._base_dir = base_dir
         self.transform = transform
         self.sample_list = []
 
-        train_path = self._base_dir+'/train.list'
-        test_path = self._base_dir+'/test.list'
+        train_path = self._base_dir + '/train.list'
+        test_path = self._base_dir + '/test.list'
 
-        if split=='train':
+        if split == 'train':
             with open(train_path, 'r') as f:
                 self.image_list = f.readlines()
         elif split == 'test':
             with open(test_path, 'r') as f:
                 self.image_list = f.readlines()
 
-        self.image_list = [item.replace('\n','') for item in self.image_list]
+        self.image_list = [item.replace('\n', '') for item in self.image_list]
         if num is not None:
             self.image_list = self.image_list[:num]
         print("total {} samples".format(len(self.image_list)))
@@ -120,24 +124,26 @@ class LAHeart(Dataset):
 
         return sample
 
+
 class Pancreas(Dataset):
     """ Pancreas Dataset """
+
     def __init__(self, base_dir=None, split='train', num=None, transform=None):
         self._base_dir = base_dir
         self.transform = transform
         self.sample_list = []
 
-        train_path = self._base_dir+'/train.list'
-        test_path = self._base_dir+'/test.list'
+        train_path = self._base_dir + '/train.list'
+        test_path = self._base_dir + '/test.list'
 
-        if split=='train':
+        if split == 'train':
             with open(train_path, 'r') as f:
                 self.image_list = f.readlines()
         elif split == 'test':
             with open(test_path, 'r') as f:
                 self.image_list = f.readlines()
 
-        self.image_list = [item.replace('\n','') for item in self.image_list]
+        self.image_list = [item.replace('\n', '') for item in self.image_list]
         if num is not None:
             self.image_list = self.image_list[:num]
         print("total {} samples".format(len(self.image_list)))
@@ -147,6 +153,7 @@ class Pancreas(Dataset):
 
     def __getitem__(self, idx):
         image_name = self.image_list[idx]
+        #print(image_name)
         h5f = h5py.File(self._base_dir + "/Pancreas_h5/" + image_name + "_norm.h5", 'r')
         image = h5f['image'][:]
         label = h5f['label'][:]
@@ -155,6 +162,7 @@ class Pancreas(Dataset):
             sample = self.transform(sample)
 
         return sample
+
 
 class Resize(object):
 
@@ -165,14 +173,14 @@ class Resize(object):
         image, label = sample['image'], sample['label']
         (w, h, d) = image.shape
         label = label.astype(np.bool)
-        image = sk_trans.resize(image, self.output_size, order = 1, mode = 'constant', cval = 0)
-        label = sk_trans.resize(label, self.output_size, order = 0)
-        assert(np.max(label) == 1 and np.min(label) == 0)
-        assert(np.unique(label).shape[0] == 2)
-        
+        image = sk_trans.resize(image, self.output_size, order=1, mode='constant', cval=0)
+        label = sk_trans.resize(label, self.output_size, order=0)
+        assert (np.max(label) == 1 and np.min(label) == 0)
+        assert (np.unique(label).shape[0] == 2)
+
         return {'image': image, 'label': label}
-    
-    
+
+
 class CenterCrop(object):
     def __init__(self, output_size):
         self.output_size = output_size
@@ -256,6 +264,7 @@ class RandomRotFlip(object):
 
         return {'image': image, 'label': label}
 
+
 class RandomRot(object):
     """
     Crop randomly flip the dataset in a sample
@@ -277,7 +286,8 @@ class RandomNoise(object):
 
     def __call__(self, sample):
         image, label = sample['image'], sample['label']
-        noise = np.clip(self.sigma * np.random.randn(image.shape[0], image.shape[1], image.shape[2]), -2*self.sigma, 2*self.sigma)
+        noise = np.clip(self.sigma * np.random.randn(image.shape[0], image.shape[1], image.shape[2]), -2 * self.sigma,
+                        2 * self.sigma)
         noise = noise + self.mu
         image = image + noise
         return {'image': image, 'label': label}
@@ -308,7 +318,7 @@ class CreateOnehotLabel(object):
         onehot_label = np.zeros((self.num_classes, label.shape[0], label.shape[1], label.shape[2]), dtype=np.float32)
         for i in range(self.num_classes):
             onehot_label[i, :, :, :] = (label == i).astype(np.float32)
-        return {'image': image, 'label': label,'onehot_label':onehot_label}
+        return {'image': image, 'label': label, 'onehot_label': onehot_label}
 
 
 class ToTensor(object):
@@ -331,6 +341,7 @@ class TwoStreamBatchSampler(Sampler):
     During the epoch, the secondary indices are iterated through
     as many times as needed.
     """
+
     def __init__(self, primary_indices, secondary_indices, batch_size, secondary_batch_size):
         self.primary_indices = primary_indices
         self.secondary_indices = secondary_indices
@@ -347,11 +358,12 @@ class TwoStreamBatchSampler(Sampler):
             primary_batch + secondary_batch
             for (primary_batch, secondary_batch)
             in zip(grouper(primary_iter, self.primary_batch_size),
-                    grouper(secondary_iter, self.secondary_batch_size))
+                   grouper(secondary_iter, self.secondary_batch_size))
         )
 
     def __len__(self):
         return len(self.primary_indices) // self.primary_batch_size
+
 
 def iterate_once(iterable):
     return np.random.permutation(iterable)
@@ -361,6 +373,7 @@ def iterate_eternally(indices):
     def infinite_shuffles():
         while True:
             yield np.random.permutation(indices)
+
     return itertools.chain.from_iterable(infinite_shuffles())
 
 
