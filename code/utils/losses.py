@@ -99,6 +99,17 @@ def loss_diff2(u_prediction_1, u_prediction_2):
     return loss_diff_avg
 
 
+def loss_diff3(u_prediction_1, u_prediction_2):
+    loss_b = 0.0
+
+    for i in range(u_prediction_2.size(1)):
+        loss_b = CE(u_prediction_2[:, i, ...].clamp(1e-8, 1 - 1e-7),
+                                 Variable(u_prediction_1[:, i, ...], requires_grad=False))
+
+    loss_diff_avg = loss_b.mean().item()
+    return loss_diff_avg
+
+
 def loss_mask(u_prediction_1, u_prediction_2, critic_segs, T_m):
     gen_mask = (critic_segs.squeeze(0) > T_m).float()
     loss_a = gen_mask * CE(u_prediction_1,
