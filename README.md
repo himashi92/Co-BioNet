@@ -90,6 +90,10 @@ nohup python train_cobionet_semi.py --dataset_name LA --labelnum 16 --lamda 0.7 
 
 It would take around 5 hours to complete model training. You can try out different hyper-parameter settings and further improve the accuracy.
 
+## Hyperparameter Setting
+
+![Hyperparameter Setting](img/hyperparameters.png?raw=true)
+
 ## Test Model
 
 - To test the Co-BioNet ensemble model for Pancreas CT dataset on 10% Lableled data
