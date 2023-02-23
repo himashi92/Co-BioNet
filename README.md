@@ -17,10 +17,10 @@ This software was originally designed and run on a system running Ubuntu (Compat
 <br>
 All the experiments are conducted on Ubuntu 20.04 Focal version with Python 3.8.
 <br>
-To train Co-BioNet with the given settings, the system requires a GPU with at least 24GB. All the experiments are conducted on Nvidia RTX 3090 single GPU.
+To train Co-BioNet with the given settings, the system requires a GPU with at least 40GB. All the experiments are conducted on Nvidia A40 single GPU.
 (Not required any non-standard hardware)
 <br>
-To test model's performance on unseen test data, the system requires a GPU with at least 4 GB.
+To test model's performance on unseen Pancreas CT and LA MRI test data, the system requires a GPU with at least 4 GB.
 
 ### Create a virtual environment
 
