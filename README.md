@@ -3,7 +3,7 @@ This repo contains the supported pytorch code and configuration files to reprodu
 
 ## Abstract
 
-The tremendous progress in deep learning has resulted in accurate  models in the field of medical AI. However, these deep learning models usually require large amounts of annotated data for training, which is prone to human biases and quite often unavailable for dense prediction tasks such as image segmentation. Inspired by semi-supervised deep learning learning algorithms, which make use of both labeled  and  unlabeled data for training, we propose a  dual-view framework based upon adversarial learning for image segmentation. In doing so, we employ two critics to allow each view to learn from high-confidence predictions of the other view by determining the uncertainty of generated predictions using entropy calculation. Further, to jointly learn the dual views and their critics, we formulate the learning problem as a min-max problem. We analyze and contrast our proposed method against state-of-the-art baselines, both qualitatively and quantitatively, on the National Institutes of Health (NIH) pancreas CT dataset and the Left Atrial Segmentation Challenge (LA) MRI dataset and demonstrate that the proposed semi-supervised method substantially outperforms the competing baselines while achieving competitive performance compared to fully-supervised counterparts. We hypothesize that uncertainty guided co-training framework can make two competing neural networks that are more robust to data artefacts and has the ability to generate multiple plausible segmentation masks that can be helpful in semi automated segmentation process. 
+Deep learning has resulted in tremendous progress in the field of medical AI. However,  training deep learning models usually require large amounts of annotated data. Annotating large-scale datasets, is prone to human biases and often very laborious, especially for dense prediction tasks such as image segmentation. Inspired by semi-supervised algorithms that employ both labeled and unlabeled data for training, we propose a  dual-view framework based on adversarial learning for segmenting volumetric images. In doing so, we employ critic networks to allow each view to learn from high-confidence predictions of the other view via measuring a notion of uncertainty. Furthermore, to jointly learn the dual-views and the critics, we formulate the learning problem as a min-max problem. We analyze and contrast our proposed method against state-of-the-art baselines, both qualitatively and quantitatively, on four public datasets with multiple modalities (\eg, CT and MRI) and demonstrate that the proposed semi-supervised method substantially outperforms the competing baselines while achieving competitive performance compared to fully-supervised counterparts. Our empirical results suggest that an uncertainty-guided co-training framework can make two neural networks robust to data artifacts and have the ability to generate plausible segmentation masks that can be helpful for semi-automated segmentation processes.  
 
 ## Link to full paper:
 To be Added
@@ -48,11 +48,17 @@ This depends on the internet connection speed. It would take around 15-30 minute
 The experiments are conducted on two publicly available datasets,
 - National Institutes of Health (NIH) Panceas CT Dataset : https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT
 - 2018 Left Atrial Segmentation Challenge Dataset : http://atriaseg2018.cardiacatlas.org
+- MSD BraTS Dataset : http://medicaldecathlon.com/
 
 Pre-processed data can be found in folder data.
 
+## Figshare Project Page
+All the pre-trained models, figures, evaluations, a video on how the training pipeline works, and the source code are included in this project page [link](https://figshare.com/projects/Uncertainty-Guided_Dual-Views_for_Semi-Supervised_Volumetric_Medical_Image_Segmentation/158963)  
+
+- DOI : https://doi.org/10.6084/m9.figshare.22140194.v5
+
 ## Trained Model Weights
-Download trained model weights from this shared drive [link](https://drive.google.com/drive/folders/1O8GmlquR2ZS6-PBTBp9d4GSWg06Z-uwa?usp=sharing), and put it under folder **code/model**
+Download trained model weights from this shared drive [link](https://drive.google.com/drive/folders/1O8GmlquR2ZS6-PBTBp9d4GSWg06Z-uwa?usp=sharing), and put it under folder **code/model** or **code_msd_brats/model**
 
 ## Running Demo
 Demonstration is created on generating segmentation masks on a sample of unseen Pancreas CT with trained torch models on 10% and 20% Labeled Pancreas CT and Left Atrial MRI data. You can run the given python notebook in the demo folder.
@@ -61,50 +67,47 @@ Demonstration is created on generating segmentation masks on a sample of unseen 
 - To train the model for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
-nohup python train_cobionet_PANCREAS.py --labelnum 6 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_10_perc.out &
+nohup python train_cobionet_semi.py --dataset_name Pancreas_CT --labelnum 6 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_10_perc.out &
 ```
 
 - To train the model for Pancreas CT dataset on 20% Lableled data
 ```bash
 cd code
-nohup python train_cobionet_PANCREAS.py --labelnum 12 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_20_perc.out &
+nohup python train_cobionet_semi.py --dataset_name Pancreas_CT --labelnum 12 --lamda 1.0 --consistency 1.0 --mu 0.01 --t_m 0.2 --max_iteration 15000 &> pa_20_perc.out &
 ```
 
 - To train the model for Left Atrial MRI dataset on 10% Lableled data
 ```bash
 cd code
-nohup python train_cobionet_LA.py --labelnum 8 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_10_perc.out &
+nohup python train_cobionet_semi.py --dataset_name LA --labelnum 8 --lamda 0.7 --consistency 1.0 --mu 0.01 --t_m 0.4 --max_iteration 15000 &> la_10_perc.out &
 ```
 
 - To train the model for Left Atrial MRI dataset on 20% Lableled data
 ```bash
 cd code
-nohup python train_cobionet_LA.py --labelnum 16 --lamda 0.8 --consistency 1.0 --mu 0.01 --t_m 0.3 --max_iteration 15000 &> la_20_perc.out &
+nohup python train_cobionet_semi.py --dataset_name LA --labelnum 16 --lamda 0.7 --consistency 1.0 --mu 0.01 --t_m 0.4 --max_iteration 15000 &> la_20_perc.out &
 ```
 
-It would take around 5 hours to complete model training.
+It would take around 5 hours to complete model training. You can try out different hyper-parameter settings and further improve the accuracy.
 
 ## Test Model
 
-- To test the model 1 for Pancreas CT dataset on 10% Lableled data
-```bash
-cd code
-python eval_3d.py --dataset_name Pancreas_CT --labelnum 6 --model_num 1
-```
-
-- To test the ensemble model for Pancreas CT dataset on 10% Lableled data
+- To test the Co-BioNet ensemble model for Pancreas CT dataset on 10% Lableled data
 ```bash
 cd code
 python eval_3d_ensemble.py --dataset_name Pancreas_CT --labelnum 6
 ```
 
-- To test and get best segmentation masks that are more closer to ground truth annotations out of model 1, model 2 and the ensemble model for Pancreas CT dataset on 10% Lableled data
-```bash
-cd code
-python eval_get_best.py --dataset_name Pancreas_CT --labelnum 6
-```
-
 ## Acknowledgements
 
 This repository makes liberal use of code from [SASSNet](https://github.com/kleinzcy/SASSnet), [UAMT](https://github.com/yulequan/UA-MT), [DTC](https://github.com/HiLab-git/DTC) and [MC-Net](https://github.com/ycwu1997/MC-Net/)
+
+## Citing Co-BioNet
+
+If you find this repository useful, please consider giving us a star ⭐ and cite our work:
+
+```bash
+      Peiris, Himashi (2023): Project Contributions. figshare. Journal contribution. https://doi.org/10.6084/m9.figshare.22140194.v5
+    }
+```
 
