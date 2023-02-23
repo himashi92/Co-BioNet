@@ -50,3 +50,19 @@ class Discriminator(torch.nn.Module):
         x = self.conv4(x)
 
         return x
+
+if __name__ == '__main__':
+    # compute FLOPS & PARAMETERS
+    from ptflops import get_model_complexity_info
+    model = Discriminator()
+    with torch.cuda.device(0):
+      macs, params = get_model_complexity_info(model, (1, 112, 112, 80), as_strings=True,
+                                               print_per_layer_stat=True, verbose=True)
+      print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
+      print('{:<30}  {:<8}'.format('Number of parameters: ', params))
+    with torch.cuda.device(0):
+      macs, params = get_model_complexity_info(model, (1, 96, 96, 96), as_strings=True,
+                                               print_per_layer_stat=True, verbose=True)
+      print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
+      print('{:<30}  {:<8}'.format('Number of parameters: ', params))
+    import ipdb; ipdb.set_trace()
