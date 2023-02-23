@@ -102,7 +102,7 @@ nohup python train_cobionet_semi.py --dataset_name MSD_BRATS --labelnum 77 --lam
 
 It would take around 5 hours to complete model training for Pancreas and Left Atrium datasets. For MSD BraTS dataset, it will take around 12 hours to complete training. You can try out different hyper-parameter settings and further improve the accuracy.
 
-## Hyperparameter Setting
+## Hyperparameter Setting and Experimental Results for different data splits. 
 
 ![Hyperparameter Setting](img/hyperparameters.png?raw=true)
 
