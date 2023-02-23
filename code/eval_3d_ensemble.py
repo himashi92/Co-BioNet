@@ -12,7 +12,7 @@ parser.add_argument('--exp', type=str, default='Co_BioNet', help='exp_name')
 parser.add_argument('--model', type=str, default='vnet', help='model_name')
 parser.add_argument('--gpu', type=str, default='0', help='GPU to use')
 parser.add_argument('--detail', type=int, default=1, help='print metrics for every samples?')
-parser.add_argument('--labelnum', type=int, default=6, help='labeled data')
+parser.add_argument('--labelnum', type=int, default=62, help='labeled data')
 parser.add_argument('--nms', type=int, default=0, help='apply NMS post-procssing?')
 
 FLAGS = parser.parse_args()
