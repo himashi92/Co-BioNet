@@ -1,0 +1,2 @@
+## Trained Model Weights
+Download trained model weights from this shared drive [link](https://drive.google.com/drive/folders/1O8GmlquR2ZS6-PBTBp9d4GSWg06Z-uwa?usp=sharing), and put it under folder **code/model**
