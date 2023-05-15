@@ -1,7 +1,7 @@
 # Co-BioNet: Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric  Medical Image Segmentation
 This repo contains the supported pytorch code and configuration files to reproduce results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
 
-[![DOI](https://sandbox.zenodo.org/badge/500272091.svg)](https://sandbox.zenodo.org/badge/latestdoi/500272091)
+[![DOI](https://sandbox.zenodo.org/badge/500272091.svg)](10.5281/zenodo.7935535)
 
 ## Abstract
 
