@@ -9,7 +9,7 @@ Deep learning has led to tremendous progress in the field of medical artificial 
 Published in Nature Machine Intelligence : [Link](https://www.nature.com/articles/s42256-023-00682-w)
 
 ## Proposed Architecture
-![Proposed Architecture](img/co_bionet_architecture.png?raw=true)
+![Proposed Architecture](img/co_bionet.png?raw=true)
 
 ## System requirements
 Under this section, we provide details on the environmental setup and dependencies required to train/test the Co-BioNet model.
