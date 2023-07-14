@@ -1,18 +1,18 @@
 # Co-BioNet: Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric  Medical Image Segmentation
-This repo contains the supported pytorch code and configuration files to reproduce results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
+This repo contains the supported pytorch code and configuration files to reproduce the results of Uncertainty-Guided Dual-Views for Semi-Supervised Volumetric Medical Image Segmentation Article.
 
 ## Abstract
 
-Deep learning has resulted in tremendous progress in the field of medical AI. However,  training deep learning models usually require large amounts of annotated data. Annotating large-scale datasets, is prone to human biases and often very laborious, especially for dense prediction tasks such as image segmentation. Inspired by semi-supervised algorithms that employ both labeled and unlabeled data for training, we propose a  dual-view framework based on adversarial learning for segmenting volumetric images. In doing so, we employ critic networks to allow each view to learn from high-confidence predictions of the other view via measuring a notion of uncertainty. Furthermore, to jointly learn the dual-views and the critics, we formulate the learning problem as a min-max problem. We analyze and contrast our proposed method against state-of-the-art baselines, both qualitatively and quantitatively, on four public datasets with multiple modalities (\eg, CT and MRI) and demonstrate that the proposed semi-supervised method substantially outperforms the competing baselines while achieving competitive performance compared to fully-supervised counterparts. Our empirical results suggest that an uncertainty-guided co-training framework can make two neural networks robust to data artifacts and have the ability to generate plausible segmentation masks that can be helpful for semi-automated segmentation processes.  
+Deep learning has led to tremendous progress in the field of medical artificial intelligence. However, training deep-learning models usually require large amounts of annotated data. Annotating large-scale datasets is prone to human biases and is often very laborious, especially for dense prediction tasks such as image segmentation. Inspired by semi-supervised algorithms that use both labelled and unlabelled data for training, we propose a dual-view framework based on adversarial learning for segmenting volumetric images. In doing so, we use critic networks to allow each view to learn from high-confidence predictions of the other view by measuring a notion of uncertainty. Furthermore, to jointly learn the dual-views and the critics, we formulate the learning problem as a min–max problem. We analyse and contrast our proposed method against state-of-the-art baselines, both qualitatively and quantitatively, on four public datasets with multiple modalities (for example, computerized topography and magnetic resonance imaging) and demonstrate that the proposed semi-supervised method substantially outperforms the competing baselines while achieving competitive performance compared to fully supervised counterparts. Our empirical results suggest that an uncertainty-guided co-training framework can make two neural networks robust to data artefacts and have the ability to generate plausible segmentation masks that can be helpful for semi-automated segmentation processes.
 
 ## Link to full paper:
-To be Added
+Published in Nature Machine Intelligence : (Link)[https://www.nature.com/articles/s42256-023-00682-w]
 
 ## Proposed Architecture
 ![Proposed Architecture](img/co_bionet_architecture.png?raw=true)
 
 ## System requirements
-Under this section, we provide details on environmental setup and dependencies required to train/test the Co-BioNet model.
+Under this section, we provide details on the environmental setup and dependencies required to train/test the Co-BioNet model.
 This software was originally designed and run on a system running Ubuntu (Compatible with Windows 11 as well).
 <br>
 All the experiments are conducted on Ubuntu 20.04 Focal version with Python 3.8.
@@ -20,7 +20,7 @@ All the experiments are conducted on Ubuntu 20.04 Focal version with Python 3.8.
 To train Co-BioNet with the given settings, the system requires a GPU with at least 40GB. All the experiments are conducted on Nvidia A40 single GPU.
 (Not required any non-standard hardware)
 <br>
-To test model's performance on unseen Pancreas CT and LA MRI test data, the system requires a GPU with at least 4 GB.
+To test the model's performance on unseen Pancreas CT and LA MRI test data, the system requires a GPU with at least 4 GB.
 
 ### Create a virtual environment
 
@@ -121,6 +121,10 @@ This repository makes liberal use of code from [SASSNet](https://github.com/klei
 ## Citing Co-BioNet
 
 If you find this repository useful, please consider giving us a star ⭐ and cite our work:
+
+```bash
+      H. Peiris, M. Hayat, Z. Chen, G. Egan, and M. Harandi, “Uncertainty-guided dual-views for semi-supervised volumetric medical image segmentation,” Nature Machine Intelligence, Jul. 2023, doi: 10.1038/s42256-023-00682-w
+```
 
 ```bash
       Peiris, Himashi (2023): Project Contributions. figshare. Journal contribution. https://doi.org/10.6084/m9.figshare.22140194.v5
