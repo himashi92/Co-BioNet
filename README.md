@@ -123,7 +123,15 @@ This repository makes liberal use of code from [SASSNet](https://github.com/klei
 If you find this repository useful, please consider giving us a star ⭐ and cite our work:
 
 ```bash
-      H. Peiris, M. Hayat, Z. Chen, G. Egan, and M. Harandi, “Uncertainty-guided dual-views for semi-supervised volumetric medical image segmentation,” Nature Machine Intelligence, Jul. 2023, doi: 10.1038/s42256-023-00682-w
+     @article{peiris2023uncertainty,
+        title={Uncertainty-guided dual-views for semi-supervised volumetric medical image segmentation},
+        author={Peiris, Himashi and Hayat, Munawar and Chen, Zhaolin and Egan, Gary and Harandi, Mehrtash},
+        journal={Nature Machine Intelligence},
+        pages={1--15},
+        year={2023},
+        publisher={Nature Publishing Group UK London
+      }
+}
 ```
 
 ```bash
